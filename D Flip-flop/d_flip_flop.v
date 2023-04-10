@@ -25,6 +25,8 @@ module d_flip_flop(q,d,clk,rst);
 input d,clk,rst,rst;
 output reg q;
 
+    
+//with active low asynchronous reset
 always @(posedge clk or negedge rst)
 begin
 if(!rst)
