@@ -19,16 +19,15 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
-
 module d_ff_tb;
-wire q;
+
 reg clk;
-reg d; 
 reg rst;
+reg d; 
+wire q;
 
-	// Instantiate the Unit Under Test (UUT)
-
-d_flip_flop UUT(.q(q),.clk(clk),.d(d),.rst(rst));
+// Instantiate the Unit Under Test (UUT)
+d_flip_flop UUT(.clk(clk),.rst(rst),.d(d),.q(q));
 
 initial
 begin
@@ -38,12 +37,16 @@ begin
     rst=0;
 end
 
-//generate clock
-always #10 d=~d;
+//generates clock
 always #5 clk=~clk;
+
+//define input D
+always #10 d=~d;
+
 
 initial
 begin
+#10 rst<=1'b1;
 $monitor("D=%b, CLOCK=%b, Q=%b",d,clk,q);
 #200 $finish;
 end
